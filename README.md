@@ -4,6 +4,9 @@ Add code in function.php file
 
 require_once dirname( __FILE__ ) . '/patient.php';
 
+
+Shortcode for patient registration form: [patient_form]
+
 ## Frontend
 
 ![alt text](https://github.com/zohaibdev/wp-new-patient-mulitstep-form/blob/main/patient/assets/images/frontend.gif?raw=true)
