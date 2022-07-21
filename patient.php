@@ -2,19 +2,30 @@
 
 require dirname(__FILE__) . '/patient/vendor/autoload.php';
 
+if (!is_plugin_active('advanced-custom-fields/acf.php')) {
+    add_action('admin_notices', 'custom_error_notice');
+    function custom_error_notice()
+    {
+        echo '<div class="error"><p>Warning - "Advanced Custom Fields" plugin is required in patient registration form to use the registration related features.</p></div>';
+    }
+} else {
+    require_once dirname(__FILE__) . '/patient/data-registration.php';
+}
+
 // Create Shortcode patient_form
 // Shortcode: [patient_form]
 function create_patientform_shortcode($atts)
 {
     $atts = shortcode_atts(array(), $atts, 'patient_form');
-    wp_enqueue_script( 'jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js', array(), time(), false );
+    wp_enqueue_style( 'bootstrap-css','https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css', array(), time() );
+    wp_enqueue_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js', array(), time(), false);
     wp_enqueue_style('multistep-form', get_stylesheet_directory_uri() . '/patient/assets/css/form.css', array(), time());
     wp_enqueue_script('jquery-validate', get_stylesheet_directory_uri() . '/patient/assets/js/jquery.validate.min.js', array(), false, true);
     wp_enqueue_script('jquery-validate-additional-methods', get_stylesheet_directory_uri() . '/patient/assets/js/additional-methods.min.js', array(), false, true);
     wp_enqueue_script('multistep-form', get_stylesheet_directory_uri() . '/patient/assets/js/form.js', array(), false, true);
 
-    wp_enqueue_style( 'signature', get_template_directory_uri() . '/patient/assets/css/jquery.signature.css', array(), time() );
-	wp_enqueue_script( 'signature', get_template_directory_uri() . '/patient/assets/js/jquery.signature.js', array(), time(), true );
+    wp_enqueue_style('signature', get_template_directory_uri() . '/patient/assets/css/jquery.signature.css', array(), time());
+    wp_enqueue_script('signature', get_template_directory_uri() . '/patient/assets/js/jquery.signature.js', array(), time(), true);
 
 
     /* ob_start();
@@ -23,7 +34,6 @@ function create_patientform_shortcode($atts)
     return $data; */
 
     get_template_part('patient/form');
-
 }
 add_shortcode('patient_form', 'create_patientform_shortcode');
 
@@ -87,7 +97,7 @@ function add_patient($form_data, $card_front_img, $card_back_img)
 }
 
 
-function pdf_document_template($doc_name, $form_data, $file_1=false, $file_2=false, $image_upload)
+function pdf_document_template($doc_name, $form_data, $file_1 = false, $file_2 = false, $image_upload)
 {
     unset($mpdf); // this is the magic
     unset($pdf_doc_template); // this is the magic
@@ -114,11 +124,11 @@ function send_mail($form_data, $file_1, $file_2, $image_upload)
 {
     $files = array();
     $files[] = pdf_document_template('basic_data', $form_data, $file_1, $file_2, $image_upload);
-    $files[] = pdf_document_template('healthcare_rights', $form_data, false,false, $image_upload);
-	$files[] = pdf_document_template('consent_treatment', $form_data, false,false, $image_upload);
-	$files[] = pdf_document_template('consent_telehealth', $form_data, false,false, $image_upload);
-	$files[] = pdf_document_template('insurance_agreement', $form_data, false, false, $image_upload);
-	$files[] = pdf_document_template('cancellation_policy', $form_data, false,false, $image_upload);
+    $files[] = pdf_document_template('healthcare_rights', $form_data, false, false, $image_upload);
+    $files[] = pdf_document_template('consent_treatment', $form_data, false, false, $image_upload);
+    $files[] = pdf_document_template('consent_telehealth', $form_data, false, false, $image_upload);
+    $files[] = pdf_document_template('insurance_agreement', $form_data, false, false, $image_upload);
+    $files[] = pdf_document_template('cancellation_policy', $form_data, false, false, $image_upload);
 
 
     $to = get_field('form_submissions_email', 'option');
@@ -167,63 +177,6 @@ add_action('wp_ajax_nopriv_patient_submit', 'patient_submit');
 add_action('wp_ajax_patient_submit', 'patient_submit');
 
 
-// Register Custom Post Type Patient
-function create_patient_cpt()
-{
-
-    $labels = array(
-        'name' => _x('Patients', 'Post Type General Name', 'textdomain'),
-        'singular_name' => _x('Patient', 'Post Type Singular Name', 'textdomain'),
-        'menu_name' => _x('Patients', 'Admin Menu text', 'textdomain'),
-        'name_admin_bar' => _x('Patient', 'Add New on Toolbar', 'textdomain'),
-        'archives' => __('Patient Archives', 'textdomain'),
-        'attributes' => __('Patient Attributes', 'textdomain'),
-        'parent_item_colon' => __('Parent Patient:', 'textdomain'),
-        'all_items' => __('All Patients', 'textdomain'),
-        'add_new_item' => __('Add New Patient', 'textdomain'),
-        'add_new' => __('Add New', 'textdomain'),
-        'new_item' => __('New Patient', 'textdomain'),
-        'edit_item' => __('Edit Patient', 'textdomain'),
-        'update_item' => __('Update Patient', 'textdomain'),
-        'view_item' => __('View Patient', 'textdomain'),
-        'view_items' => __('View Patients', 'textdomain'),
-        'search_items' => __('Search Patient', 'textdomain'),
-        'not_found' => __('Not found', 'textdomain'),
-        'not_found_in_trash' => __('Not found in Trash', 'textdomain'),
-        'featured_image' => __('Featured Image', 'textdomain'),
-        'set_featured_image' => __('Set featured image', 'textdomain'),
-        'remove_featured_image' => __('Remove featured image', 'textdomain'),
-        'use_featured_image' => __('Use as featured image', 'textdomain'),
-        'insert_into_item' => __('Insert into Patient', 'textdomain'),
-        'uploaded_to_this_item' => __('Uploaded to this Patient', 'textdomain'),
-        'items_list' => __('Patients list', 'textdomain'),
-        'items_list_navigation' => __('Patients list navigation', 'textdomain'),
-        'filter_items_list' => __('Filter Patients list', 'textdomain'),
-    );
-    $args = array(
-        'label' => __('Patient', 'textdomain'),
-        'description' => __('', 'textdomain'),
-        'labels' => $labels,
-        'menu_icon' => 'dashicons-businessman',
-        'supports' => array('title'),
-        'taxonomies' => array(),
-        'public' => false,
-        'show_ui' => true,
-        'show_in_menu' => true,
-        'menu_position' => 5,
-        'show_in_admin_bar' => true,
-        'show_in_nav_menus' => true,
-        'can_export' => true,
-        'has_archive' => false,
-        'hierarchical' => false,
-        'exclude_from_search' => true,
-        'show_in_rest' => true,
-        'publicly_queryable' => false,
-        'capability_type' => 'post',
-    );
-    register_post_type('patient', $args);
-}
-add_action('init', 'create_patient_cpt', 0);
 
 
 function wporg_add_custom_box()
