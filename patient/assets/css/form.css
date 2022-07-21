@@ -1,0 +1,460 @@
+.form-section-pateint .tab {
+    display: none;
+    width: 100%;
+    margin: 0px auto;
+}
+
+.form-section-pateint .current {
+    display: block;
+}
+
+.sep-class-form {
+    font-size: 15px !important;
+    color: #767677 !important;
+}
+
+.form-section-pateint input[type=text],
+.form-section-pateint input[type=email],
+.form-section-pateint input[type=tel] {
+    padding: 15px;
+    width: 100%;
+    font-size: 14px;
+    font-family: 'Gilroy Medium';
+    border: 1px solid #70707075;
+    border-radius: 8px;
+}
+
+.for-date-display {
+	padding: 15px;
+    width: 100%;
+    font-size: 14px;
+    font-family: 'Gilroy Medium';
+    border: 1px solid #70707075;
+    border-radius: 8px;
+	color: #757575;
+}
+.form-section-pateint .form-check-input {
+    border: 1px solid rgb(51 0 102);
+}
+.form-section-pateint .field label{
+
+    font-size: 14px;
+    font-family: 'Gilroy Medium';
+   
+}
+.form-section-pateint .field {
+    position: relative;
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+}
+
+.form-section-pateint .field label.error {
+    position: absolute;
+    bottom: 5px;
+    display: block;
+    font-size: 12px;
+    left: 5px;
+}
+
+.form-section-pateint button {
+    background: #7851a9;
+    padding: 13px 40px;
+    color: white !important;
+    border-radius: 50px;
+    border: 1px solid #7851a9;
+    text-decoration: none;
+    font-family: Gilroy Bold;
+    font-size: 13px;
+    margin-left: 10px;
+	text-transform: uppercase;
+}
+
+.form-section-pateint .patient-main {
+    font-size: 43px !important;
+    font-family: 'Gilroy Bold';
+    color: #330066;
+}
+
+.form-section-pateint h3 {
+    font-size: 23px;
+    font-family: 'Gilroy Bold';
+    color: #330066;
+}
+
+.form-section-pateint h1 {
+    font-size: 34px;
+    font-weight: 700 !important;
+    font-family: 'Gilroy Bold';
+    color: #330066;
+}
+
+.answer-show {
+    display: none;
+}
+
+.form-section-pateint h4 {
+    font-size: 15px;
+    font-family: 'Gilroy Bold';
+    color: #330066;
+}
+
+.form-section-pateint button:hover {
+    opacity: 0.8;
+}
+
+.form-section-pateint .previous {
+    background: white;
+    padding: 13px 40px;
+    color: #878788 !important;
+    border-radius: 50px;
+    border: 1px solid white;
+    text-decoration: none;
+    font-family: Gilroy Bold;
+    font-size: 13px;
+}
+
+
+/* Make circles that indicate the steps of the form: */
+
+.form-section-pateint .step {
+    height: 15px;
+    width: 15px;
+    cursor: pointer;
+    margin: 0 2px;
+    color: #fff;
+    background-color: #DEDEDE;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 3;
+    padding: 0px;
+    font-size: 0;
+    margin-top: 17px;
+}
+
+.form-section-pateint .step.active {
+    height: 35px !important;
+    width: 35px !important;
+    cursor: pointer;
+    margin: 0 2px;
+    color: #fff;
+    background-color: #AE87D0 !important;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 3;
+    padding: 6px;
+    font-size: 15px;
+    margin-top: 5px !important;
+}
+
+.checked {
+    background: url(../images/icon-1.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 35px !important;
+    width: 35px !important;
+    height: 15px;
+    width: 15px;
+    cursor: pointer;
+    margin: 0 2px;
+    color: #fff;
+    background-color: #AE87D0 !important;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 3;
+    margin-top: 5px !important;
+    font-size: 0;
+}
+
+.form-section-pateint {
+    padding-bottom: 50px;
+}
+
+.form-section-pateint .step.finish {
+    background-color: #4CAF50;
+}
+
+.form-section-pateint .error {
+    color: #f00;
+}
+
+.check-box-container {
+    display: block;
+    position: relative;
+    padding-left: 32px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: 'Gilroy Medium';
+}
+
+.check-box-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+
+/* Create a custom checkbox */
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    font-size: 14px;
+    background: white;
+    font-family: 'Gilroy Light';
+    border: 1px solid #330066;
+}
+
+
+/* On mouse-over, add a grey background color */
+
+.check-box-container:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+
+/* When the checkbox is checked, add a blue background */
+
+.check-box-container input:checked~.checkmark {
+    background-color: #330066;
+}
+
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+/* Show the checkmark when checked */
+
+.check-box-container input:checked~.checkmark:after {
+    display: block;
+}
+
+
+/* Style the checkmark/indicator */
+
+.check-box-container .checkmark:after {
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.some-css-check .checkmark {
+    position: absolute;
+    top: 8px;
+    left: 28px;
+    height: 16px;
+    width: 16px;
+    font-size: 14px;
+    background: white;
+    font-family: 'Gilroy Light';
+    border: 1px solid #330066;
+}
+
+.stepwizard-step {
+    display: flex;
+    text-align: center;
+    position: relative;
+    justify-content: space-between;
+}
+
+.stepwizard {
+    position: relative;
+}
+
+.stepwizard-row {
+    width: 100%;
+}
+
+.stepwizard-row:before {
+    top: 24px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+}
+
+.index-file-border input {
+    border-color: #330066 !important;
+    border-style: dashed !important;
+}
+
+.for-last-part-form {
+    display: flex !important;
+    justify-content: space-between !important;
+}
+.for-last-part-form {
+    display: flex;
+}
+.assignment-policy-show {
+    display: none;
+}
+
+.financial-policy_show {
+    display: none;
+}
+
+.last-form-hr {
+    color: #707070;
+}
+
+
+.financial-class-accept {
+    display: none;
+}
+
+.office-policy-show {
+  display:none;
+}
+.hipa-policy-show{
+	 display: none;
+}
+
+.card-policy-show{
+		 display: none;
+}
+.const-policy-show{
+	 display: none;
+
+}
+
+.form-check-input:checked {
+    background-color: #330066 ;
+    border-color: #330066;
+}
+.index-file-border input {
+       border-color: #707070!important;
+    border-style: dashed !important;
+    border: 2px solid;
+    width: 100%;
+    padding: 25px;
+}
+
+
+.terms-field {
+    padding: 12px calc(var(--bs-gutter-x) * .5);
+    border-top: 1px solid #ccc;
+}
+
+.terms-field > .check-box-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+}
+
+.terms-field label {
+
+    color: #767677;
+    font-size: 18px;
+    font-family: 'Gilroy Medium';
+}
+
+.terms-field input[type=checkbox] {
+    opacity: 1 !important;
+    border-color: black !IMPORTANT;
+    background: red !important;
+}
+
+.terms-field > .check-box-container .checkmark {
+    position: relative;
+}
+
+.field.index-file-border .error {
+    color: red;
+    bottom: -5px !important;
+    font-family: 'Gilroy Light';
+}
+
+.loading_screen {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgb(0 0 0 / 30%);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	display:none;
+}
+
+.loading_screen .spinner-border {
+    width: 10rem;
+    height: 10rem;
+    color: #fff;
+}
+.sep-class-form-formates{
+font-size: 11px !important;
+    font-family: 'Gilroy Bold'!important
+    color: #7851a9 !important;
+    padding-top: 5px;
+}
+.modal-conetent {
+    overflow-y: scroll; 
+    padding: 32px 65px;
+	height: 437px;
+}
+
+.modal-conetent p {
+    margin-bottom: 15px;
+}
+
+.modal-conetent ol {
+    color: #767677;
+    padding-left: 15px;
+}
+
+.modal-conetent li {
+    margin-bottom: 15px;
+}
+
+  .modal-conetent.modal-conetent.modal-conetent::-webkit-scrollbar {
+   width: 3px;
+  }
+
+ .modal-conetent.modal-conetent::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  .modal-conetent::-webkit-scrollbar-thumb {
+  background-color: #8d8d8e;
+    border-radius: 10px;
+    border: 1px solid #8d8d8e !important;
+}
+
+.for-check-padding{
+	padding-right: 35px;
+}
+.form-title-font{
+	 font-family: 'Gilroy Bold'!important;
+   font-size: 43px !important;
+	text-align: center;
+}

@@ -7,16 +7,23 @@ require dirname(__FILE__) . '/patient/vendor/autoload.php';
 function create_patientform_shortcode($atts)
 {
     $atts = shortcode_atts(array(), $atts, 'patient_form');
-    wp_enqueue_style('multistep-form', get_stylesheet_directory_uri() . '/assets/css/form.css', array(), time());
-    wp_enqueue_script('jquery-validate', get_stylesheet_directory_uri() . '/assets/js/jquery.validate.min.js', array(), false, true);
-    wp_enqueue_script('jquery-validate-additional-methods', get_stylesheet_directory_uri() . '/assets/js/additional-methods.min.js', array(), false, true);
+    wp_enqueue_script( 'jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js', array(), time(), false );
+    wp_enqueue_style('multistep-form', get_stylesheet_directory_uri() . '/patient/assets/css/form.css', array(), time());
+    wp_enqueue_script('jquery-validate', get_stylesheet_directory_uri() . '/patient/assets/js/jquery.validate.min.js', array(), false, true);
+    wp_enqueue_script('jquery-validate-additional-methods', get_stylesheet_directory_uri() . '/patient/assets/js/additional-methods.min.js', array(), false, true);
+    wp_enqueue_script('multistep-form', get_stylesheet_directory_uri() . '/patient/assets/js/form.js', array(), false, true);
 
-    wp_enqueue_script('multistep-form', get_stylesheet_directory_uri() . '/assets/js/form.js', array(), false, true);
+    wp_enqueue_style( 'signature', get_template_directory_uri() . '/patient/assets/css/jquery.signature.css', array(), time() );
+	wp_enqueue_script( 'signature', get_template_directory_uri() . '/patient/assets/js/jquery.signature.js', array(), time(), true );
 
-    ob_start();
+
+    /* ob_start();
     $data = require __DIR__ . '/patient/form.php';
     $data = ob_get_clean();
-    return $data;
+    return $data; */
+
+    get_template_part('patient/form');
+
 }
 add_shortcode('patient_form', 'create_patientform_shortcode');
 
